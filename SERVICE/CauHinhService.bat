@@ -1,17 +1,17 @@
 @echo off
 chcp 65001 >nul
-title Cau hinh SQL Server tu Excel
+title Cau hinh Windows Service tu Excel
 
 echo ============================================================
-echo    TOOL CAU HINH SQL SERVER TU FILE EXCEL
+echo    TOOL CAU HINH WINDOWS SERVICE TU FILE EXCEL
 echo ============================================================
 echo.
 
 REM Lấy đường dẫn thư mục chứa file .bat
 set "SCRIPT_DIR=%~dp0"
 set "EXCEL_FILE=%SCRIPT_DIR%ExcelCauHinh\Settup AXE.xlsx"
-set "SHEET_NAME=Cài đặt SQL"
-set "EXE_FILE=%SCRIPT_DIR%dist\sql_config_tool.exe"
+set "SHEET_NAME=Cài đặt service"
+set "EXE_FILE=%SCRIPT_DIR%dist\service_config_tool.exe"
 
 REM Kiểm tra file Excel có tồn tại không
 if not exist "%EXCEL_FILE%" (
@@ -24,7 +24,7 @@ if not exist "%EXCEL_FILE%" (
 
 echo.
 echo ============================================================
-echo    BAT DAU CAU HINH SQL SERVER
+echo    BAT DAU CAU HINH WINDOWS SERVICE
 echo ============================================================
 echo File Excel: %EXCEL_FILE%
 echo Sheet: %SHEET_NAME%
@@ -43,7 +43,7 @@ if exist "%EXE_FILE%" (
     ) else (
         echo.
         echo ============================================================
-        echo    HOAN TAT CAU HINH SQL SERVER
+        echo    HOAN TAT CAU HINH WINDOWS SERVICE
         echo ============================================================
         echo.
     )
@@ -82,7 +82,7 @@ if errorlevel 1 (
 
 REM Chạy tool bằng Python
 cd /d "%SCRIPT_DIR%"
-python sql_config_tool.py "%EXCEL_FILE%" --sheet "%SHEET_NAME%"
+python service_config_tool.py "%EXCEL_FILE%" --sheet "%SHEET_NAME%"
 
 if errorlevel 1 (
     echo.
@@ -91,7 +91,7 @@ if errorlevel 1 (
 ) else (
     echo.
     echo ============================================================
-    echo    HOAN TAT CAU HINH SQL SERVER
+    echo    HOAN TAT CAU HINH WINDOWS SERVICE
     echo ============================================================
     echo.
 )

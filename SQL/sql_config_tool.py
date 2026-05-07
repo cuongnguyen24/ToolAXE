@@ -93,11 +93,12 @@ class SQLConfigTool:
         Parse cấu trúc Excel sheet 'Cài đặt SQL'
         
         Cấu trúc:
-        - Rows đầu: Thông tin chung (đường dẫn backup, database, user/password)
+        - Rows đầu: Thông tin chung (đường dẫn backup, database, user/password, server)
         - SQL chuẩn bị: DECLARE, CREATE TABLE (ở cột cuối)
         - Mỗi database: 1 row với thông tin + script SQL ở cột cuối
         """
         result = {
+            'server_name': 'localhost',  # Mặc định localhost
             'backup_path': '',
             'database_path': '',
             'user_name': '',
@@ -117,7 +118,9 @@ class SQLConfigTool:
             
             col0_lower = col0.lower()
             
-            if 'đường dẫn' in col0_lower and 'bak' in col0_lower:
+            if 'server' in col0_lower and ('name' in col0_lower or 'tên' in col0_lower or 'địa chỉ' in col0_lower):
+                result['server_name'] = col1 if col1 else 'localhost'
+            elif 'đường dẫn' in col0_lower and 'bak' in col0_lower:
                 result['backup_path'] = col1
             elif 'đường dẫn' in col0_lower and ('mdf' in col0_lower or 'database' in col0_lower):
                 result['database_path'] = col1
@@ -516,6 +519,7 @@ class SQLConfigTool:
         print("\n" + "=" * 60)
         print("THÔNG TIN CẤU HÌNH ĐÃ ĐỌC")
         print("=" * 60)
+        print(f"SQL Server: {config['server_name']}")
         print(f"Đường dẫn backup (.bak): {config['backup_path']}")
         print(f"Đường dẫn database (.mdf): {config['database_path']}")
         print(f"User SQL: {config['user_name']}")
@@ -561,7 +565,7 @@ class SQLConfigTool:
             print("BẮT ĐẦU CẤU HÌNH SQL SERVER")
         print("=" * 60)
         
-        server = 'localhost'
+        server = config.get('server_name', 'localhost')
         success, summary = self.run_sql_script(script, server=server, dry_run=dry_run)
         
         # 6. Kết quả
