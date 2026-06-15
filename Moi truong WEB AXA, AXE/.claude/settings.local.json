@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -L -o \"D:/Develop/CE/Core/Tool Core/Tu dong tao lap moi truong/Moi truong WEB AXA, AXE/ndp48-x86-x64-allos-enu.exe\" \"https://download.microsoft.com/download/1/1/4/114bc33d-b5ef-4153-84bc-c3c2d556e43e/ndp48-x86-x64-allos-enu.exe\" --progress-bar)"
+    ]
+  }
+}
