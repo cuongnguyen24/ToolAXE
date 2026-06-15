@@ -370,6 +370,8 @@ class SQLConfigTool:
                 cmd_parts.extend(['-S', server])
             
             cmd_parts.append('-E')  # Windows Authentication
+            # ODBC Driver 18+ mặc định mã hóa và không tin chứng chỉ tự ký trên localhost
+            cmd_parts.append('-C')
             cmd_parts.extend(['-i', temp_sql_path])
             
             print(f"🚀 Đang chạy sqlcmd...")
@@ -447,6 +449,11 @@ class SQLConfigTool:
             
             if stderr:
                 print(f"\n⚠ Stderr: {stderr[:500]}")
+                if 'certificate chain was issued by an authority that is not trusted' in stderr.lower():
+                    print(
+                        "\nGợi ý SSL: ODBC Driver 18 cần tin chứng chỉ SQL Server. "
+                        "Tool đã thêm -C cho sqlcmd; nếu vẫn lỗi, cài chứng chỉ hợp lệ hoặc chạy lại bản tool mới."
+                    )
                 error_count += 1
             
             # Chỉ coi là có lỗi nếu có lỗi thực sự HOẶC returncode != 0
