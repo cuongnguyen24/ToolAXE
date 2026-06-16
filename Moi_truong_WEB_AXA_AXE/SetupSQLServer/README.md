@@ -4,7 +4,7 @@
 
 Bo tool nay dung de cai:
 
-- SQL Server theo `SqlVersion`, `Edition`, `InstanceName` trong config
+- SQL Server theo `InstanceName` va media dat trong `Installers.SqlOfflinePath`
 - SSMS
 - Cau hinh TCP, firewall, login, role, va tham so van hanh co ban
 
@@ -40,8 +40,6 @@ SetupSQLServer\
 
 Sua [CustomerSettings.json](</C:/Users/Admin/Desktop/ToolAXE/CauHinhHeThongAXE/Moi truong WEB AXA, AXE/SetupSQLServer/config/CustomerSettings.json>):
 
-- `SqlVersion`
-- `Edition`
 - `InstanceName`
 - `Installers.SqlOfflinePath`
 - `Installers.SsmsOfflinePath`
@@ -58,7 +56,7 @@ Sua [CustomerSettings.json](</C:/Users/Admin/Desktop/ToolAXE/CauHinhHeThongAXE/M
 File `.bat` se doc config nay de:
 
 - sinh `ConfigurationFile.generated.ini`
-- hien thi dung version/edition/instance
+- hien thi dung instance
 - tim bo cai SQL offline
 - tim bo cai SSMS offline
 
@@ -113,5 +111,5 @@ Tool se:
 
 - Neu `SQL Engine` da ton tai, tool se skip buoc tim media va buoc cai engine.
 - Neu `SSMS` da ton tai, tool se skip buoc cai SSMS.
-- `SqlVersion` va `Edition` trong config giup dong bo thong tin hien thi va dong goi, nhung bo cai that su van phu thuoc media ban dat vao thu muc `offline`.
+- Ban dat media SQL/SSMS nao vao thu muc `offline` thi tool se cai theo media do.
 - `ConfigurationFile.ini` la template goc, con file thuc te de SQL Setup dung la `config\ConfigurationFile.generated.ini`.

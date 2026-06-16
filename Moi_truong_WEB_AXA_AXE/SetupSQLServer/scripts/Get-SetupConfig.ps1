@@ -45,16 +45,6 @@ function Resolve-ConfigPathValue {
 
 $settings = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
 
-$sqlVersion = Get-OptionalPropertyValue -Object $settings -PropertyName "SqlVersion"
-if ([string]::IsNullOrWhiteSpace($sqlVersion)) {
-    $sqlVersion = "SQL Server"
-}
-
-$edition = Get-OptionalPropertyValue -Object $settings -PropertyName "Edition"
-if ([string]::IsNullOrWhiteSpace($edition)) {
-    $edition = "Unknown"
-}
-
 $instanceName = Get-OptionalPropertyValue -Object $settings -PropertyName "InstanceName"
 if ([string]::IsNullOrWhiteSpace($instanceName)) {
     $instanceName = "MSSQLSERVER"
@@ -71,8 +61,6 @@ $sqlOfflinePath = Resolve-ConfigPathValue -Value $sqlOfflinePathSetting -Fallbac
 $ssmsOfflinePath = Resolve-ConfigPathValue -Value $ssmsOfflinePathSetting -Fallback "installers\offline\SSMSOffline"
 
 @(
-    "SQL_VERSION=$sqlVersion"
-    "SQL_EDITION=$edition"
     "INSTANCE_NAME=$instanceName"
     "SQL_SERVICE_NAME=$sqlServiceName"
     "SQL_AGENT_SERVICE_NAME=$agentServiceName"

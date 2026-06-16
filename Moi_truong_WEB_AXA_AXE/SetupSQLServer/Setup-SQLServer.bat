@@ -47,8 +47,6 @@ for /f "usebackq tokens=1* delims==" %%A in (`powershell -NoProfile -ExecutionPo
 
 if "%SQL_OFFLINE_PATH%"=="" set "SQL_OFFLINE_PATH=%BASE_DIR%installers\offline\SQLServer2022Offline"
 if "%SSMS_OFFLINE_PATH%"=="" set "SSMS_OFFLINE_PATH=%BASE_DIR%installers\offline\SSMSOffline"
-if "%SQL_VERSION%"=="" set "SQL_VERSION=SQL Server"
-if "%SQL_EDITION%"=="" set "SQL_EDITION=Unknown"
 if "%INSTANCE_NAME%"=="" set "INSTANCE_NAME=MSSQLSERVER"
 if "%SQL_SERVICE_NAME%"=="" set "SQL_SERVICE_NAME=MSSQLSERVER"
 if "%SQL_AGENT_SERVICE_NAME%"=="" set "SQL_AGENT_SERVICE_NAME=SQLSERVERAGENT"
@@ -58,7 +56,7 @@ set "SSMS_SETUP_EXE="
 
 echo.
 echo ============================================================
-echo   THIET LAP %SQL_VERSION% %SQL_EDITION% + SSMS
+echo   THIET LAP SQL SERVER + SSMS
 echo   Instance: %INSTANCE_NAME%
 echo ============================================================
 echo Log file: %LOG_FILE%
@@ -112,7 +110,7 @@ if "%SQL_ENGINE_INSTALLED%"=="1" (
     >>"%LOG_FILE%" echo [%date% %time%] [SKIP] SQL Engine already installed
 ) else (
     echo [INFO] SQL Engine chua cai day du, se chay cai dat ngay bay gio.
-    echo [INFO] Bat dau cai %SQL_VERSION% %SQL_EDITION%.
+    echo [INFO] Bat dau cai SQL Server tu media offline da cau hinh.
     echo [INFO] Buoc nay co the mat 10-30 phut tuy may. Cua so se bao trang thai moi 15 giay.
     set "SQL_ARGS=/Q /ACTION=Install /IACCEPTSQLSERVERLICENSETERMS /SUPPRESSPRIVACYSTATEMENTNOTICE /CONFIGURATIONFILE=%GENERATED_INI%"
     powershell -NoProfile -ExecutionPolicy Bypass -File "%RUN_PROCESS_PS1%" -FilePath "%SQL_SETUP_EXE%" -ArgumentString "!SQL_ARGS!" -StatusMessage "Dang cai SQL Server Engine" -LogPath "%LOG_FILE%"
@@ -243,9 +241,6 @@ if "!SQL_SETUP_EXE!"=="" (
     echo.
     echo Vui long dat full media hoac file ISO vao:
     echo   %SQL_OFFLINE_PATH%
-    echo.
-    echo Phien ban mong muon trong config:
-    echo   %SQL_VERSION% - %SQL_EDITION%
     set "HAS_ERROR=1"
     goto :eof
 )
