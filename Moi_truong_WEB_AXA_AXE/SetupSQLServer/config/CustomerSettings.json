@@ -1,0 +1,53 @@
+{
+  "InstanceName": "MSSQLSERVER",
+  "Installers": {
+    "SqlOfflinePath": "installers\\offline\\SQLServer2022Offline",
+    "SsmsOfflinePath": "installers\\offline\\SSMSOffline"
+  },
+  "AuthenticationMode": "Mixed",
+  "SaPassword": "Axe@2026#Sql",
+  "SqlAdmins": [
+    "BUILTIN\\Administrators"
+  ],
+  "ServiceAccounts": {
+    "SqlServiceAccount": "NT Service\\MSSQLSERVER",
+    "AgentServiceAccount": "NT Service\\SQLSERVERAGENT"
+  },
+  "Network": {
+    "EnableTcp": true,
+    "EnableNamedPipes": false,
+    "TcpPort": 1433,
+    "OpenFirewall": true
+  },
+  "Paths": {
+    "DataRoot": "C:\\Program Files\\Microsoft SQL Server",
+    "UserDbData": "C:\\Program Files\\Microsoft SQL Server\\MSSQL17.MSSQLSERVER\\MSSQL\\DATA",
+    "UserDbLog": "C:\\Program Files\\Microsoft SQL Server\\MSSQL17.MSSQLSERVER\\MSSQL\\DATA",
+    "TempDbData": "C:\\Program Files\\Microsoft SQL Server\\MSSQL17.MSSQLSERVER\\MSSQL\\DATA",
+    "TempDbLog": "C:\\Program Files\\Microsoft SQL Server\\MSSQL17.MSSQLSERVER\\MSSQL\\DATA",
+    "Backup": "C:\\Program Files\\Microsoft SQL Server\\MSSQL17.MSSQLSERVER\\MSSQL\\Backup"
+  },
+  "ServerTuning": {
+    "MaxServerMemoryMB": 2147483647,
+    "MaxDop": 4,
+    "CostThresholdForParallelism": 50
+  },
+  "AppLogins": [
+    {
+      "LoginName": "dev",
+      "LoginType": "SqlLogin",
+      "Password": "Dev@2026#Sql",
+      "DefaultDatabase": "master",
+      "ServerRoles": [
+        "sysadmin"
+      ]
+    }
+  ],
+  "Databases": [
+    {
+      "Name": "AXE_APP",
+      "CreateIfMissing": false,
+      "RecoveryModel": "FULL"
+    }
+  ]
+}
